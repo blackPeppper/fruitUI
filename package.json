@@ -7,10 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "sweet": "node bin/index.js"
+    "fruitui": "./cli/index.js"
   },
   "dependencies": {
-    "execution-time": "^1.4.1",
     "nanospinner": "^1.1.0",
     "sass": "^1.50.1"
   }
