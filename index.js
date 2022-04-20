@@ -2,7 +2,7 @@
 const process = require("process")
 const fs = require('fs');
 if (process.argv[2] == "init") {
-    fs.writeFile('../../../config.json', "test", err => {
+    fs.writeFile('./config.json', "test", err => {
         if (err) {
             console.error(err)
             return
