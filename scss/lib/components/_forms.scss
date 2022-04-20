@@ -1,0 +1,93 @@
+.form-group {
+  accent-color: var(--primary);
+  transition: all 0.1s ease-in-out;
+  padding: $base-padding $base-padding;
+  .form {
+    width: 100%;
+    display: block;
+    padding: $base-padding;
+    margin-top: $base-margin;
+    border-radius: $base-border-radius;
+    border: solid $base-border-thickness var(--primary);
+    &:focus {
+      transform: scale(0.98);
+    }
+  }
+  .label {
+    cursor: pointer;
+    line-height: 30px;
+    margin: $base-margin;
+  }
+  .form-part {
+    display: block;
+    [type="checkbox"]:active,
+    [type="radio"]:active {
+      transform: scale(0.6);
+    }
+  }
+  .submit {
+    margin: 0;
+    display: block;
+  }
+  .floating-div {
+    position: relative;
+    height: 48px;
+    margin-top: $base-margin;
+  }
+  .floating-form {
+    width: 100%;
+    height: 100%;
+    font-size: $base-font-size * 0.5;
+    border: 1px solid #dadce0;
+    border-radius: 0.5rem;
+    outline: none;
+    padding: 1rem;
+    background: none;
+    z-index: 1;
+  }
+  .floating-label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0 0.25rem;
+    background-color: #fff;
+    color: var(--primary);
+    font-size: $base-font-size * 0.7;
+    transition: 0.3s;
+  }
+
+  /*Input focus move up label*/
+  .floating-form:focus + .floating-label {
+    top: -0.5rem;
+    left: 0.8rem;
+    color: var(--primary);
+    font-size: $base-font-size * 0.6;
+    font-weight: 500;
+    z-index: 10;
+  }
+
+  /*Input focus sticky top label*/
+  .floating-form:not(:placeholder-shown).floating-form:not(:focus)
+    + .floating-label {
+    top: -0.5rem;
+    left: 0.8rem;
+    z-index: 10;
+    font-size: $base-font-size * 0.6;
+    font-weight: 500;
+  }
+
+  /*Input focus*/
+  .floating-form:focus {
+    border: 1.5px solid var(--primary);
+  }
+}
+
+///
+@include dark-mode {
+  .form {
+    @include sync-color(#2f3b47);
+  }
+  .floating-label {
+    background-color: #2f3b47;
+  }
+}

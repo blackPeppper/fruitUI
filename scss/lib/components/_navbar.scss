@@ -1,0 +1,26 @@
+%flex-layout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar {
+  @extend %flex-layout;
+  padding: $base-padding $base-padding * 2;
+  box-shadow: $base-box-shadow;
+  .site-title {
+    font-size: $font-size-lg;
+  }
+  .container {
+    @extend %flex-layout;
+  }
+}
+
+@if $uitl-handler == false {
+  @each $key, $val in $colors {
+    .navbar-#{$key} {
+      @include sync-color($val);
+    }
+  }
+}

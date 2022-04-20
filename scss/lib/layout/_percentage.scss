@@ -1,0 +1,57 @@
+@use "sass:math";
+
+$columns: 12 !default;
+
+@mixin percentage-passer($prop) {
+  @for $i from 1 through $columns {
+    .#{$prop}\:col-#{$i} {
+      flex-grow: 0;
+      width: math.div($i * 100%, $columns);
+    }
+    .#{$prop}\:row-#{$i} {
+      flex-grow: 0;
+      height: math.div($i * 100%, $columns);
+    }
+  }
+}
+
+@if $percentage-system {
+  @include xs {
+    @include percentage-passer(xs)
+  }
+
+  @include sm {
+    @include percentage-passer(sm)
+  }
+
+  @include md {
+    @include percentage-passer(md)
+  }
+
+  @include lg {
+    @include percentage-passer(lg)
+  }
+
+  @include xl {
+    @include percentage-passer(xl)
+  }
+
+  @if $xxl-size {
+    @include xxl {
+      @include percentage-passer(xxl)
+    }
+  }
+}
+@else {
+  @for $i from 1 through $columns {
+    .col-#{$i} {
+      flex-grow: 0;
+      width: math.div($i * 100%, $columns);
+    }
+
+    .row-#{$i} {
+      flex-grow: 0;
+      height: math.div($i * 100%, $columns);
+    }
+  }
+}

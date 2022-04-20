@@ -1,0 +1,95 @@
+@use "sass:math";
+
+$flex-columns: 12 !default;
+
+.row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+$flex-flow: (
+  "row": row,
+  "col": column,
+  "row-reverse": row-reverse,
+  "col-reverse": column-reverse,
+) !default;
+
+@each $kay, $val in $flex-flow {
+  @if $reponsive-flex-dir {
+    @include xs {
+      .xs\:flex-#{$kay} {
+        flex-direction: $val;
+      }
+    }
+
+    @include sm {
+      .sm\:flex-#{$kay} {
+        flex-direction: $val;
+      }
+    }
+
+    @include md {
+      .md\:flex-#{$kay} {
+        flex-direction: $val;
+      }
+    }
+
+    @include lg {
+      .lg\:flex-#{$kay} {
+        flex-direction: $val;
+      }
+    }
+
+    @include xl {
+      .xl\:flex-#{$kay} {
+        flex-direction: $val;
+      }
+    }
+
+    @if $xxl-size {
+      @include xxl {
+        .xxl\:flex-#{$kay} {
+          flex-direction: $val;
+        }
+      }
+    }
+  } @else {
+    .flex-#{$kay} {
+      flex-direction: $val;
+    }
+  }
+}
+
+@mixin flex-passer($prop) {
+  @for $i from 1 through $flex-columns {
+    .#{$prop}\:flex-#{$i} {
+      flex: 0 0 math.div($i * 100%, $flex-columns);
+    }
+  }
+}
+
+@include xs {
+  @include flex-passer(xs);
+}
+
+@include sm {
+  @include flex-passer(sm);
+}
+
+@include md {
+  @include flex-passer(md);
+}
+
+@include lg {
+  @include flex-passer(lg);
+}
+
+@include xl {
+  @include flex-passer(xl);
+}
+
+@if $xxl-size {
+  @include xxl {
+    @include flex-passer(xxl);
+  }
+}

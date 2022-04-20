@@ -1,0 +1,18 @@
+:root {
+  --dark-white: #{$white};
+  --dark-black: #{$black};
+
+  @each $key, $val in $colors {
+    --#{$key}: #{$val};
+  }
+}
+.text-dark {
+  color: var(--dark-black);
+}
+.text-light {
+  color: var(--dark-white);
+}
+@include dark-mode {
+    --dark-black: #{$white};
+    --dark-white: #{$black};
+}

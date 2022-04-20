@@ -1,0 +1,35 @@
+@import 'basket';
+
+@include shades(900,100);
+@include padding(6);
+@include margin(6);
+@include width(1);
+@include height(1);
+
+@include dark-mode {
+  
+}
+
+.box {
+  @include sync-color(rgb(236, 242, 255));
+  border: solid 1px;
+  padding: 5px;
+}
+
+
+
+// @mixin uitl-maker($props) {
+//   @each $Bps, $val in $breakpoints {
+//       .#{$Bps}#{$separator}#{$props} {
+//         @content;
+//       }
+//     }
+// }
+
+// @include uitl-maker(text-align) {
+//   @each $key, $val in $text-align-values {
+//     #{$key} {
+//       background-color: $val;
+//     }
+//   }
+// }

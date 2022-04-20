@@ -1,0 +1,30 @@
+@use "sass:math";
+
+.card {
+  display: block;
+  padding: $base-padding;
+  border: $base-border-thickness solid #ddd;
+  border-radius: $base-border-radius;
+  box-shadow: $base-box-shadow;
+
+  &-title {
+    font-size: $base-font-size;
+    padding-bottom: $base-padding;
+    font-weight: bold;
+  }
+  &-body {
+    font-size: $base-font-size;
+    a {
+      color: #2958db;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+  @include dark-mode {
+    .card {
+      border-color: rgb(54, 52, 56)
+    }
+  }

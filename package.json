@@ -1,0 +1,17 @@
+{
+  "name": "furitcli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "SIL",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "sweet": "node bin/index.js"
+  },
+  "dependencies": {
+    "execution-time": "^1.4.1",
+    "nanospinner": "^1.1.0",
+    "sass": "^1.50.1"
+  }
+}

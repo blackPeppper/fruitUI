@@ -1,0 +1,634 @@
+@each $key, $val in $font-size {
+  @if $reponsive-font {
+    @include xs {
+      .d\:font-#{$key} {
+        font-size: #{$val * .8};
+      }
+    }
+    @include sm {
+      .d\:font-#{$key} {
+        font-size: #{$val * .920};
+      }
+    }
+    @include md {
+      .d\:font-#{$key} {
+        font-size: #{$val * 1.2};
+      }
+    }
+    @include lg {
+      .d\:font-#{$key} {
+        font-size: #{$val * 1.3};
+      }
+    }
+    @include xl {
+      .d\:font-#{$key} {
+        font-size: #{$val * 1.4};
+      }
+    }
+    @if $xxl-size {
+      @include xxl {
+        .d\:font-#{$key} {
+          font-size: #{$val * 1.5};
+        }
+      }
+    }
+  }
+  .font-#{$key} {
+    font-size: #{$val};
+  }
+}
+
+@each $key, $val in $opacity {
+  .o-#{$key} {
+    opacity: #{$val};
+  }
+}
+
+@each $key, $val in $border-radius {
+  .br-#{$key} {
+    border-radius: #{$val};
+  }
+}
+
+@mixin display() {
+  @each $display in $display-props {
+    @if $reponsive-display {
+      @include xs {
+        .xs\:#{$display} {
+          display: #{$display};
+        }
+      }
+      @include sm {
+        .sm\:#{$display} {
+          display: #{$display};
+        }
+      }
+      @include md {
+        .md\:#{$display} {
+          display: #{$display};
+        }
+      }
+      @include lg {
+        .lg\:#{$display} {
+          display: #{$display};
+        }
+      }
+      @include xl {
+        .xl\:#{$display} {
+          display: #{$display};
+        }
+      }
+      @if $xxl-size {
+        @include xxl {
+          .xxl\:#{$display} {
+            display: #{$display};
+          }
+        }
+      }
+
+    }@else {
+        .#{$display} {
+          display: #{$display};
+        }
+      }
+    }
+  }
+
+@include display();
+
+@mixin height($height-end: 12, $height-start: 0) {
+  @each $key, $val in $sizes {
+    @if ($key >= $height-start and $key <= $height-end) {
+      @if $reponsive-height {
+        @include xs {
+          .xs\:h-#{$key} {
+            height: $val;
+          }
+        }
+        @include sm {
+          .sm\:h-#{$key} {
+            height: $val;
+          }
+        }
+        @include md {
+          .md\:h-#{$key} {
+            height: $val;
+          }
+        }
+        @include lg {
+          .lg\:h-#{$key} {
+            height: $val;
+          }
+        }
+        @include xl {
+          .xl\:h-#{$key} {
+            height: $val;
+          }
+        }
+        @if $xxl-size {
+          @include xxl {
+            .xxl\:h-#{$key} {
+              height: $val;
+            }
+          }
+        }
+      } @else {
+        .h-#{$key} {
+          height: $val;
+        }
+      }
+    }
+  }
+}
+
+@mixin width($width-end: 12, $width-start: 0) {
+  @each $key, $val in $sizes {
+    @if ($key >= $width-start and $key <= $width-end) {
+      @if $reponsive-width {
+        @include xs {
+          .xs\:w-#{$key} {
+            width: $val;
+          }
+        }
+        @include sm {
+          .sm\:w-#{$key} {
+            width: $val;
+          }
+        }
+        @include md {
+          .md\:w-#{$key} {
+            width: $val;
+          }
+        }
+        @include lg {
+          .lg\:w-#{$key} {
+            width: $val;
+          }
+        }
+        @include xl {
+          .xl\:w-#{$key} {
+            width: $val;
+          }
+        }
+        @if $xxl-size {
+          @include xxl {
+            .xxl\:w-#{$key} {
+              width: $val;
+            }
+          }
+        }
+      } @else {
+        .w-#{$key} {
+          width: $val;
+        }
+      }
+    }
+  }
+}
+
+@mixin align-passer($prop: xs) {
+  @each $align in $alignments {
+    .#{$prop}\:justify-#{$align} {
+      justify-content: #{$align};
+    }
+    .#{$prop}\:justify-items-#{$align} {
+      justify-items: #{$align};
+    }
+    .#{$prop}\:items-#{$align} {
+      align-items: #{$align};
+    }
+    .#{$prop}\:content-#{$align} {
+      align-content: #{$align};
+    }
+    .#{$prop}\:justify-self-#{$align} {
+      justify-self: #{$align};
+    }
+    .#{$prop}\:align-self-#{$align} {
+      align-self: #{$align};
+    }
+  }
+}
+
+@if $reponsive-alignments {
+  @include xs {
+    @include align-passer(xs);
+  }
+  @include sm {
+    @include align-passer(sm);
+  }
+  @include md {
+    @include align-passer(md);
+  }
+  @include lg {
+    @include align-passer(lg);
+  }
+  @include xl {
+    @include align-passer(xl);
+  }
+  @if $xxl-size {
+    @include xxl {
+      @include align-passer(xxl);
+    }
+  }
+} @else {
+  @each $align in $alignments {
+    .justify-#{$align} {
+      justify-content: #{$align};
+    }
+    .justify-items-#{$align} {
+      justify-items: #{$align};
+    }
+    .items-#{$align} {
+      align-items: #{$align};
+    }
+    .content-#{$align} {
+      align-content: #{$align};
+    }
+    .justify-self-#{$align} {
+      justify-self: #{$align};
+    }
+    .align-self-#{$align} {
+      align-self: #{$align};
+    }
+  }
+}
+
+$text-align-values: (
+  'left': left,
+  'center': center,
+  'right': right,
+  'justify': justify,
+);
+
+@mixin text-align($prop: xs) {
+  @each $name, $value in $text-align-values {
+    .#{$prop}\:text-#{$name} {
+      text-align: #{$value};
+    }
+  }
+}
+
+@if $reponsive-alignments {
+  @include xs {
+    @include text-align(xs);
+  }
+  @include sm {
+    @include text-align(sm);
+  }
+  @include md {
+    @include text-align(md);
+  }
+  @include lg {
+    @include text-align(lg);
+  }
+  @include xl {
+    @include text-align(xl);
+  }
+  @if $xxl-size {
+    @include xxl {
+      @include text-align(xxl);
+    }
+  }
+} @else {
+  @each $align in $alignments {
+    
+  }
+}
+
+
+@mixin padding($padding-end: 6, $padding-start: 0) {
+  @each $key, $val in $padding-margin-sizes {
+    @if ($key >= $padding-start and $key <= $padding-end) {
+      @if $reponsive-padding {
+        @include xs {
+          .xs\:p-#{$key} {
+            padding: $val;
+          }
+          .xs\:pb-#{$key} {
+            padding-bottom: $val;
+          }
+          .xs\:pt-#{$key} {
+            padding-top: $val;
+          }
+          .xs\:pl-#{$key} {
+            padding-left: $val;
+          }
+          .xs\:pr-#{$key} {
+            padding-right: $val;
+          }
+          .xs\:py-#{$key} {
+            padding-top: $val;
+            padding-bottom: $val;
+          }
+          .xs\:px-#{$key} {
+            padding-left: $val;
+            padding-right: $val;
+          }
+        }
+        @include sm {
+          .sm\:p-#{$key} {
+            padding: $val;
+          }
+          .sm\:pb-#{$key} {
+            padding-bottom: $val;
+          }
+          .sm\:pt-#{$key} {
+            padding-top: $val;
+          }
+          .sm\:pl-#{$key} {
+            padding-left: $val;
+          }
+          .sm\:pr-#{$key} {
+            padding-right: $val;
+          }
+          .sm\:py-#{$key} {
+            padding-top: $val;
+            padding-bottom: $val;
+          }
+          .sm\:px-#{$key} {
+            padding-left: $val;
+            padding-right: $val;
+          }
+        }
+        @include lg {
+          .lg\:p-#{$key} {
+            padding: $val;
+          }
+          .lg\:pb-#{$key} {
+            padding-bottom: $val;
+          }
+          .lg\:pt-#{$key} {
+            padding-top: $val;
+          }
+          .lg\:pl-#{$key} {
+            padding-left: $val;
+          }
+          .lg\:pr-#{$key} {
+            padding-right: $val;
+          }
+          .lg\:py-#{$key} {
+            padding-top: $val;
+            padding-bottom: $val;
+          }
+          .lg\:px-#{$key} {
+            padding-left: $val;
+            padding-right: $val;
+          }
+        }
+        @include xl {
+          .xl\:p-#{$key} {
+            padding: $val;
+          }
+          .xl\:pb-#{$key} {
+            padding-bottom: $val;
+          }
+          .xl\:pt-#{$key} {
+            padding-top: $val;
+          }
+          .xl\:pl-#{$key} {
+            padding-left: $val;
+          }
+          .xl\:pr-#{$key} {
+            padding-right: $val;
+          }
+          .xl\:py-#{$key} {
+            padding-top: $val;
+            padding-bottom: $val;
+          }
+          .xl\:px-#{$key} {
+            padding-left: $val;
+            padding-right: $val;
+          }
+        }
+        @if $xxl-size {
+          @include xxl {
+            .xxl\:p-#{$key} {
+              padding: $val;
+            }
+            .xxl\:pb-#{$key} {
+              padding-bottom: $val;
+            }
+            .xxl\:pt-#{$key} {
+              padding-top: $val;
+            }
+            .xxl\:pl-#{$key} {
+              padding-left: $val;
+            }
+            .xxl\:pr-#{$key} {
+              padding-right: $val;
+            }
+            .xxl\:py-#{$key} {
+              padding-top: $val;
+              padding-bottom: $val;
+            }
+            .xxl\:px-#{$key} {
+              padding-left: $val;
+              padding-right: $val;
+            }
+          }
+        }
+      } @else {
+        .p-#{$key} {
+          padding: $val;
+        }
+        .pb-#{$key} {
+          padding-bottom: $val;
+        }
+        .pt-#{$key} {
+          padding-top: $val;
+        }
+        .pl-#{$key} {
+          padding-left: $val;
+        }
+        .pr-#{$key} {
+          padding-right: $val;
+        }
+        .py-#{$key} {
+          padding-top: $val;
+          padding-bottom: $val;
+        }
+        .px-#{$key} {
+          padding-left: $val;
+          padding-right: $val;
+        }
+      }
+    }
+  }
+}
+
+@mixin margin($margin-end: 6, $margin-start: 0) {
+  @each $key, $val in $padding-margin-sizes {
+    @if ($key >= $margin-start and $key <= $margin-end) {
+      @if $reponsive-margin {
+        @include xs {
+          .xs\:m-#{$key} {
+            margin: $val;
+          }
+          .xs\:mb-#{$key} {
+            margin-bottom: $val;
+          }
+          .xs\:mt-#{$key} {
+            margin-top: $val;
+          }
+          .xs\:ml-#{$key} {
+            margin-left: $val;
+          }
+          .xs\:mr-#{$key} {
+            margin-right: $val;
+          }
+          .xs\:my-#{$key} {
+            margin-top: $val;
+            margin-bottom: $val;
+          }
+          .xs\:mx-#{$key} {
+            margin-left: $val;
+            margin-right: $val;
+          }
+        }
+        @include sm {
+          .sm\:m-#{$key} {
+            margin: $val;
+          }
+          .sm\:mb-#{$key} {
+            margin-bottom: $val;
+          }
+          .sm\:mt-#{$key} {
+            margin-top: $val;
+          }
+          .sm\:ml-#{$key} {
+            margin-left: $val;
+          }
+          .sm\:mr-#{$key} {
+            margin-right: $val;
+          }
+          .sm\:my-#{$key} {
+            margin-top: $val;
+            margin-bottom: $val;
+          }
+          .sm\:mx-#{$key} {
+            margin-left: $val;
+            margin-right: $val;
+          }
+        }
+        @include lg {
+          .lg\:m-#{$key} {
+            margin: $val;
+          }
+          .lg\:mb-#{$key} {
+            margin-bottom: $val;
+          }
+          .lg\:mt-#{$key} {
+            margin-top: $val;
+          }
+          .lg\:ml-#{$key} {
+            margin-left: $val;
+          }
+          .lg\:mr-#{$key} {
+            margin-right: $val;
+          }
+          .lg\:my-#{$key} {
+            margin-top: $val;
+            margin-bottom: $val;
+          }
+          .lg\:mx-#{$key} {
+            margin-left: $val;
+            margin-right: $val;
+          }
+        }
+        @include xl {
+          .xl\:m-#{$key} {
+            margin: $val;
+          }
+          .xl\:mb-#{$key} {
+            margin-bottom: $val;
+          }
+          .xl\:mt-#{$key} {
+            margin-top: $val;
+          }
+          .xl\:ml-#{$key} {
+            margin-left: $val;
+          }
+          .xl\:mr-#{$key} {
+            margin-right: $val;
+          }
+          .xl\:my-#{$key} {
+            margin-top: $val;
+            margin-bottom: $val;
+          }
+          .xl\:mx-#{$key} {
+            margin-left: $val;
+            margin-right: $val;
+          }
+        }
+        @if $xxl-size {
+          @include xxl {
+            .xxl\:m-#{$key} {
+              margin: $val;
+            }
+            .xxl\:mb-#{$key} {
+              margin-bottom: $val;
+            }
+            .xxl\:mt-#{$key} {
+              margin-top: $val;
+            }
+            .xxl\:ml-#{$key} {
+              margin-left: $val;
+            }
+            .xxl\:mr-#{$key} {
+              margin-right: $val;
+            }
+            .xxl\:my-#{$key} {
+              margin-top: $val;
+              margin-bottom: $val;
+            }
+            .xxl\:mx-#{$key} {
+              margin-left: $val;
+              margin-right: $val;
+            }
+          }
+        }
+      } @else {
+        .m-#{$key} {
+          margin: $val;
+        }
+        .mb-#{$key} {
+          margin-bottom: $val;
+        }
+        .mt-#{$key} {
+          margin-top: $val;
+        }
+        .ml-#{$key} {
+          margin-left: $val;
+        }
+        .mr-#{$key} {
+          margin-right: $val;
+        }
+        .my-#{$key} {
+          margin-top: $val;
+          margin-bottom: $val;
+        }
+        .mx-#{$key} {
+          margin-left: $val;
+          margin-right: $val;
+        }
+      }
+    }
+  }
+}
+
+$scale : (
+  xxs: 0.25,
+  xs: 0.5,
+  sm: 0.75,
+  md: 1,
+  lg: 1.25,
+  xl: 1.5,
+  xxl: 2,
+  xxxl: 3,
+) !default;
+
+@each $key, $val in $scale {
+  .scale-#{$key} {
+    transform: scale($val);
+  }
+}

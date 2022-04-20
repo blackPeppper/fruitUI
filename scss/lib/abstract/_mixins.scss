@@ -1,0 +1,37 @@
+@use "sass:map";
+
+@mixin sync-color($color) {
+  background-color: $color;
+  color: text-color($color);
+}
+
+@mixin shades($shade-end: 600,$shade-start: 100 ) {
+  @each $color, $shades in $preset-color {
+    @each $shade, $val in $shades {
+      @if ($shade >= $shade-start and $shade <= $shade-end) {
+        .text-#{"" + $color}-#{$shade} {
+          color: #{$val};
+        }
+        .bg-#{"" + $color}-#{$shade} {
+          background-color: #{$val};
+        }
+      }
+    }
+  }
+}
+
+@mixin dark-mode {
+  :is([data-theme='dark'],body.dark,.dark) {
+    @content;
+  }
+}
+
+@mixin reaction {
+  &:hover:not(.muted) {
+    filter: brightness(1.07);
+  }
+  &:active:not(.muted) {
+    transform: scale(0.9);
+  }
+}
+

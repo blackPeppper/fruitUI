@@ -1,0 +1,119 @@
+%btn {
+  border: 0;
+  margin: 3px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-block;
+  transition: all 0.1s ease-in;
+  border-radius: $base-border-radius;
+  padding: $base-padding * .90 $base-padding * 2;
+  @include reaction();
+}
+//////
+.btn {
+  @extend %btn;
+  @include sync-color(#bcdbff);
+}
+//////
+@each $key, $val in $native-components {
+  .btn-flat-#{$key} {
+    @extend %btn;
+    @include sync-color($val);
+  }
+}
+// *  dark mode default button & btn flat
+@if $dark-mode {
+  @include dark-mode {
+    .btn {
+      background-color: #1e2857;
+    }
+    @each $key, $val in $native-components-dark {
+      .btn-flat-#{$key} {
+        background-color: darken($val, 10%);
+      }
+    }
+  }
+}
+//////
+.btn-outline {
+  @extend %btn;
+  background-color: transparent;
+  border: $base-border-thickness * 2 solid #bcdbff;
+  color: #2389ff;
+  &:hover:not(.muted) {
+    @include sync-color(#bcdbff);
+  }
+}
+//////
+@each $key, $val in $colors {
+  .btn-#{$key} {
+    @extend %btn;
+      @if $uitl-handler == false {
+        @include sync-color($val);
+      }
+    }
+  .btn-outlined-#{$key} {
+    @extend %btn;
+    color: $val;
+    background-color: transparent;
+    border: $base-border-thickness * 2 solid $val;
+    &:hover:not(.muted) {
+      @include sync-color($val);
+    }
+  }
+// * dark mode colored buttons
+
+  @if $dark-mode {
+    @include dark-mode {
+      .btn-#{$key} {
+        filter: drop-shadow( 0px 20px 20px rgba($val,.2));
+        background-color: darken($val, 7%);
+      }
+    }
+    .btn-outlined-#{$key} {
+      border: $base-border-thickness * 2 solid darken($val, 10%);
+      &:hover:not(.muted) {
+        filter: drop-shadow( 0px 20px 20px rgba($val,.2));
+        @include sync-color(darken($val, 7%));
+      }
+    }
+  }
+}
+// override this because it's not that good
+.btn-outlined-white {
+  color: #8e8e8e;
+  &:hover:not(.muted) {
+    border-color: #dadada;
+    color: #3e3e4d;
+  }
+}
+@include dark-mode {
+  .btn-outlined-black {
+  border-color: #111013;
+  color: #ececf5;
+  &:hover:not(.muted) {
+    background-color: #111013;
+    color: #ececf5;
+  }
+}
+}
+
+.btn-white{
+  color: #161622;
+}
+//////////////////
+$btn-scale: (
+  "btn-xs": 0.7rem,
+  "btn-sm": 1rem,
+  "btn-md": 1.2rem,
+  "btn-lg": 1.5rem,
+  "btn-xl": 2rem
+) !default;
+
+@each $key, $val in $btn-scale {
+  .#{$key} {
+    font-size: $val;
+  }
+}

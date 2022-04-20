@@ -1,0 +1,131 @@
+$grid-columns: 12 !default;
+
+@mixin grid-passer($prop) {
+// * grid columns and rows auto class generator
+  @for $i from 1 through $grid-columns {
+    .#{$prop}\:grid-cols-#{$i} {
+      grid-template-columns: repeat($i, minmax(0px, 1fr));
+    }
+    .#{$prop}\:grid-rows-#{$i} {
+      grid-template-rows: repeat($i, minmax(0px, 1fr));
+    }
+  }
+  .#{$prop}\:grid-cols-auto {
+    grid-template-columns: auto;
+  }
+  .#{$prop}\:grid-rows-auto {
+    grid-template-rows: auto;
+  }
+// * grid columns and rows span class generator
+  @for $i from 1 through $grid-columns {
+    .#{$prop}\:col-span-#{$i} {
+      grid-column: span $i / span $i;
+    }
+    .#{$prop}\:row-span-#{$i} {
+      grid-row: span $i / span $i;
+    }
+  }
+  .#{$prop}\:col-span-auto {
+    grid-column: auto;
+  }
+  .#{$prop}\:col-span-full {
+    grid-column: 1 / -1;
+  }
+  .#{$prop}\:row-span-auto {
+    grid-row: auto;
+  }
+  .#{$prop}\:row-span-full {
+    grid-row: 1 / -1;
+  }
+// * grid columns and rows start and end class generator
+  @for $i from 1 through $grid-columns {
+    .#{$prop}\:col-start-#{$i + 1} {
+      grid-column-start: #{$i + 1};
+    }
+    .#{$prop}\:col-end-#{$i + 1} {
+      grid-column-end: #{$i + 1};
+    }
+    .#{$prop}\:row-start-#{$i + 1} {
+      grid-row-start: #{$i + 1};
+    }
+    .#{$prop}\:row-end-#{$i + 1} {
+      grid-row-end: #{$i + 1};
+    }
+  }
+}
+@if $reponsive-grid {
+  @include xs {
+    @include grid-passer(xs);
+  }
+  @include sm {
+    @include grid-passer(sm);
+  }
+  @include md {
+    @include grid-passer(md);
+  }
+  @include lg {
+    @include grid-passer(lg);
+  }
+  @include xl {
+    @include grid-passer(xl);
+  }
+  @if $xxl-size {
+    @include xxl {
+      @include grid-passer(xxl);
+    }
+  }
+}
+@else {
+// * grid columns and rows auto class generator
+@for $i from 1 through $grid-columns {
+  .grid-cols-#{$i} {
+    grid-template-columns: repeat($i, minmax(0px, 1fr));
+  }
+  .grid-rows-#{$i} {
+    grid-template-rows: repeat($i, minmax(0px, 1fr));
+  }
+}
+.grid-cols-auto {
+  grid-template-columns: auto;
+}
+.grid-rows-auto {
+  grid-template-rows: auto;
+}
+// * grid columns and rows span class generator
+@for $i from 1 through $grid-columns {
+  .col-span-#{$i} {
+    grid-column: span $i / span $i;
+  }
+  .row-span-#{$i} {
+    grid-row: span $i / span $i;
+  }
+}
+.col-span-auto {
+  grid-column: auto;
+}
+.col-span-full {
+  grid-column: 1 / -1;
+}
+.row-span-auto {
+  grid-row: auto;
+}
+.row-span-full {
+  grid-row: 1 / -1;
+}
+// * grid columns and rows start and end class generator
+@for $i from 1 through $grid-columns {
+  .col-start-#{$i + 1} {
+    grid-column-start: #{$i + 1};
+  }
+  .col-end-#{$i + 1} {
+    grid-column-end: #{$i + 1};
+  }
+  .row-start-#{$i + 1} {
+    grid-row-start: #{$i + 1};
+  }
+  .row-end-#{$i + 1} {
+    grid-row-end: #{$i + 1};
+  }
+}
+
+}
