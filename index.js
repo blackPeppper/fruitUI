@@ -2,13 +2,22 @@
 const process = require("process")
 const sass = require("sass")
 const fs = require('fs');
-let myData = `module.exports = {
+
+if (process.argv[2] == "init") {
+    let myData = `module.exports = {
     cssPath : "",
-    scssPath:"",
+    scssPath:"${process.argv[3]}.scss",
     outputStyle:"" //compressed or expanded
 }`
-if (process.argv[2] == "init") {
     fs.writeFileSync('./fruit.config.js', myData, err => {
+        if (err) {
+            console.error(err)
+            return
+        }
+        //file written successfully
+    })
+    let sassdata = `@import "./node_modules/furitcli/scss/basket"`
+    fs.writeFileSync(`./${process.argv[3]}.scss`, sassdata, err => {
         if (err) {
             console.error(err)
             return
@@ -24,7 +33,6 @@ try{
 }catch{
     
 }
-console.log(config)
 //variable want to take from user
 let cssPath = config.cssPath
 let scssPath  = config.scssPath
@@ -34,14 +42,10 @@ if(config.outputStyle){
 }else{
     outputStyle = "expanded"
 }
-console.log(outputStyle)
-sass.render({
-    file: scssPath,  outputStyle: outputStyle
-}, function (err, result) {
-    fs.writeFile(cssPath, String(result.css), function(err) {
-        if(err) {
-            return console.log(err);
-        }
-        console.log("scss compile done !");
-    });
+const result = sass.compile(scssPath,{style: outputStyle});
+fs.writeFile(cssPath, result.css, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("scss compile done !");
 });
