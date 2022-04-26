@@ -3,6 +3,8 @@ const process = require("process")
 const sass = require("sass")
 const fs = require('fs');
 const func = require("./cli/name")
+// init condition to writr file named (fruit.config.js)
+//take a command line parameter
 if (process.argv[2] == "init" || process.argv[2] == "-i") {
     let myData = `module.exports = {
     cssPath : "",
@@ -15,6 +17,7 @@ if (process.argv[2] == "init" || process.argv[2] == "-i") {
         }
         //file written successfully
     })
+//craete the scss file on init with command line parameter for the name 
     if(process.argv[3]){
     let sassdata = `@import "./node_modules/furitcli/scss/basket"`
     fs.writeFileSync(`./${process.argv[3]}.scss`, sassdata, err => {
@@ -25,16 +28,15 @@ if (process.argv[2] == "init" || process.argv[2] == "-i") {
         //file written successfully
     })
     }
-    let test = require('../../fruit.config.js')
-    console.log("init filee craeted" + test)
+    console.log("init file created")
     process.exit(0)
 }
 try {
     var config = require("../../fruit.config.js");
-} catch {
-
+} catch (e){
+    console.log(e)
 }
-//variable want to take from user
+//the watcher code for sass compile
 if (process.argv[2] == "watch" || process.argv[2] == "-w") {
     let watch = process.argv[3]
     let cssPath = config.cssPath
