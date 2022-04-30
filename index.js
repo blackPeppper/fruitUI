@@ -2,7 +2,8 @@
 const process = require("process")
 const sass = require("sass")
 const fs = require('fs');
-const func = require("./cli/name")
+const path = require("path")
+const func = require("furitcli/cli/functions")
 var reset = "\x1b[0m"
 var green = "\x1b[32m"
 // init condition to writr file named (fruit.config.js)
@@ -70,7 +71,7 @@ if (process.argv[2] == "watch" || process.argv[2] == "-w") {
         test4 = test4.slice(0, test4.search(".scss"))
         return test4
     }
-    fs.watch(watch, { recursive: true }, (ev, fn) => {
+    mywatch: fs.watch(watch, { recursive: true }, (ev, fn) => {
         //calc time
         let timeone = performance.now();
         let cssPath = config.cssPath
@@ -81,10 +82,17 @@ if (process.argv[2] == "watch" || process.argv[2] == "-w") {
             outputStyle = "expanded"
         }
         mytset = []
+        let tt = true // for check if sass compile hass error dont print done
         console.clear()
         readAllFolder(watch)
         mytset.forEach(element => {
-            let result = sass.compile(element, { style: outputStyle });
+            try {
+                var result = sass.compile(element, { style: outputStyle });
+            } catch (e) {
+                console.log(e.message)
+                tt = false
+                return;
+            }
             fs.writeFile(`${cssPath}/${takename(element)}.css`, result.css.toString(), function (err) {
                 if (err) {
                     return console.log(err);
@@ -100,8 +108,10 @@ if (process.argv[2] == "watch" || process.argv[2] == "-w") {
             time = `${Math.floor(timetow - timeone)} ms`;
         }
         //
-        console.clear();
-        console.log(green, `done in ${time}`, reset)
+        // console.clear();
+        if (tt) {
+            console.log(green, `done in ${time}`, reset)
+        }
     })
 }
 
@@ -119,6 +129,13 @@ if (process.argv[2] == "build" || process.argv[2] == "-b") {
             console.log(`stderr: ${stderr}`);
             return;
         }
-        console.log(green, `done`, reset);
+        //////////////////////////////////
+        fs.readdirSync(config.buildOutput).forEach(function (dirContent) {
+            let dirContent2 = path.resolve(config.buildOutput, dirContent);
+            if (fs.statSync(dirContent2).isFile()) {
+                func.Tsize(dirContent,dirContent2)
+            }
+        });
+        console.log(green,`done`, reset);
     });
 }
